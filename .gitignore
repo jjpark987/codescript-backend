@@ -4,5 +4,3 @@
 
 # Ignore directories
 __pycache__/
-
-venv/
