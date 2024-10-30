@@ -1,0 +1,6 @@
+# Python
+python-dotenv>=1.0.1
+requests>=2.32.3
+
+# Django
+django>=5.1.2
