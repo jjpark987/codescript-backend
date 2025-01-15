@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from typing import Dict
-from config import add_cors_middleware
+from app.api.config import add_cors_middleware
 
 app = FastAPI()
 
@@ -11,4 +11,4 @@ add_cors_middleware(app)
 
 @app.get('/')
 async def home() -> Dict[str, str]:
-    return {'message': "Welcome to the CodeScript API"}
+    return {'message': 'Welcome to the CodeScript API'}
