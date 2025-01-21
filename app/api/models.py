@@ -40,7 +40,7 @@ class Problem(Base):
     title: Mapped[str] = mapped_column(String(255), nullable=False)
     difficulty: Mapped[int] = mapped_column(Integer, nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=False)
-    example: Mapped[List[Dict[str, str]]] = mapped_column(JSON, nullable=False)
+    examples: Mapped[List[Dict[str, str]]] = mapped_column(JSON, nullable=False)
     constraints: Mapped[str] = mapped_column(Text, nullable=False)
 
     subcategory_id: Mapped[int] = mapped_column(Integer, ForeignKey('subcategories.id'), nullable=False)
