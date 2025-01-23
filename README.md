@@ -63,6 +63,7 @@ alembic upgrade head
 
 To seed the database with:
 - 3 categories (data manipulations, combinatorics, optimizations)
+- subcategories for each category
 
 1. Make sure MySQL database is set up and migrated with the latest migration
 
