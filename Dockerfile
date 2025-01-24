@@ -20,4 +20,4 @@ COPY .env .env
 EXPOSE 80
 
 # Command to run the application with Uvicorn (FastAPI server)
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app.api.main:app", "--host", "0.0.0.0", "--port", "80"]

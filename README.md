@@ -72,3 +72,41 @@ To seed the database with:
 ```zsh
 python -m app.database.seed
 ```
+
+## Docker
+
+- Build and run containers in the foreground
+
+```zsh
+docker-compose up --build
+```
+
+- Stop and remove containers
+
+```zsh
+docker-compose down
+```
+
+- Run containers in background
+
+```zsh
+docker-compose up -d
+```
+
+- Stop containers without removing
+
+```zsh
+docker-compose stop
+```
+
+- Start previously stopped containers
+
+```zsh
+docker-compose start
+```
+
+- Check container status
+
+```zsh
+docker ps
+```

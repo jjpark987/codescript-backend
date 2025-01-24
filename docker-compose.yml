@@ -13,12 +13,10 @@ services:
   
   db:
     image: mysql:8.0
-    container_name: mysql-db
+    container_name: codescript-db
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword  # Set root password for MySQL
-      MYSQL_DATABASE: fastapi_db  # Name of the database
-      MYSQL_USER: user  # Optional: Define a user
-      MYSQL_PASSWORD: password  # Optional: Define password for the user
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: codescript_db  
     volumes:
       - mysql_data:/var/lib/mysql  # Persist MySQL data
     ports:
