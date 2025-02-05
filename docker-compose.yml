@@ -3,24 +3,38 @@ services:
     build: .
     container_name: codescript-backend
     ports:
-      - "8000:80"  # Expose port 8000 on host, mapped to port 80 in the container
+      - "8000:80"
     environment:
-      - DATABASE_URL=${DATABASE_URL}  # Using environment variable for database connection
+      - DATABASE_URL=${DATABASE_URL}
     volumes:
-      - .:/app  # Mount current directory to /app in the container (for development)
+      - .:/app
     depends_on:
-      - db  # Ensures MySQL starts before FastAPI
-  
+      db:
+        condition: service_healthy
+    networks:
+      - codescript_network
+
   db:
     image: mysql:8.0
     container_name: codescript-db
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: codescript_db  
+      MYSQL_DATABASE: codescript_db
     volumes:
-      - mysql_data:/var/lib/mysql  # Persist MySQL data
+      - mysql_data:/var/lib/mysql
     ports:
-      - "3306:3306"  # Expose MySQL port for access
+      - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - codescript_network
 
 volumes:
-  mysql_data:  # Define a volume for MySQL data persistence
+  mysql_data:
+
+networks:
+  codescript_network:
+    external: true

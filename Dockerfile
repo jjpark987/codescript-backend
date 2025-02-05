@@ -13,11 +13,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code into the container
 COPY . .
 
-# Set environment variables (you can specify custom ones if needed)
-COPY .env .env
-
 # Expose the port the app will run on (for FastAPI, default is 8000)
 EXPOSE 80
 
-# Command to run the application with Uvicorn (FastAPI server)
-CMD ["uvicorn", "app.api.main:app", "--host", "0.0.0.0", "--port", "80"]
+# Run migrations, seed data, and start FastAPI
+CMD ["sh", "-c", "alembic upgrade head && python -m app.database.seed && uvicorn app.api.main:app --host 0.0.0.0 --port 80"]

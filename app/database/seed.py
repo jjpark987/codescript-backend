@@ -81,5 +81,4 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
-
-# Run from the root using `python -m app.database.seed`
+    
