@@ -5,35 +5,11 @@ services:
     ports:
       - "8000:80"
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+      - DOCKER_DATABASE_URL=${DOCKER_DATABASE_URL}
     volumes:
       - .:/app
-    depends_on:
-      db:
-        condition: service_healthy
     networks:
       - codescript_network
-
-  db:
-    image: mysql:8.0
-    container_name: codescript-db
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: codescript_db
-    volumes:
-      - mysql_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - codescript_network
-
-volumes:
-  mysql_data:
 
 networks:
   codescript_network:

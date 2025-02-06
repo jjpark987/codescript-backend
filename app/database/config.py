@@ -8,7 +8,12 @@ from typing import AsyncGenerator
 
 load_dotenv()
 
-DATABASE_URL = os.getenv('DATABASE_URL')
+# Function to check if we are inside a docker container
+def is_running_in_docker() -> bool:
+    return os.path.exists('/.dockerenv') or os.path.exists('/run/.containerenv')
+
+# Determine DATABASE_URL
+DATABASE_URL = os.getenv('DOCKER_DATABASE_URL') if is_running_in_docker() else os.getenv('DATABASE_URL')
 
 # SQLAlchemy setup for async
 engine = create_async_engine(DATABASE_URL, echo=True)
