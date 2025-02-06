@@ -122,3 +122,9 @@ docker compose restart
 ```zsh
 docker ps
 ```
+
+- Open a shell inside an already running container
+
+```zsh
+docker exec -it codescript-fastapi bash
+```
