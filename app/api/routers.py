@@ -8,4 +8,4 @@ router = APIRouter()
 
 @router.post('/problems', response_model=ProblemResponse, status_code=201)
 async def post_problem_route(problem: ProblemCreate, db: Session = Depends(get_session)) -> ProblemResponse:
-    return await post_problem(db, problem)  
+    return await post_problem(db, problem)
