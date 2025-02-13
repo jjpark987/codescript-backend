@@ -45,7 +45,7 @@ The API should now be running at http://0.0.0.0:80.
 
 ## Alebmic Version Control
 
-This project uses Alembic for managing database migrations and version control. Whenever there are updates to the database models, it is essential to create and apply a migration to ensure that the database schema remains in sync with the application’s data structures.
+This project uses Alembic for managing database migrations and version control. Whenever there are updates to the database models, we must create and apply a migration to ensure that the database schema remains in sync with the application’s data structures.
 
 1. Create migration
 
@@ -65,9 +65,9 @@ To seed the database with:
 - 3 categories (data manipulations, combinatorics, optimizations)
 - subcategories for each category
 
-1. Make sure MySQL database is set up and migrated with the latest migration
+- Make sure MySQL database server is up and migrated with the latest migration
 
-2. Seed database
+- Seed database
 
 ```zsh
 python -m app.database.seed
@@ -75,20 +75,22 @@ python -m app.database.seed
 
 ## Docker
 
+### Commands
+
 - Build image and create container in the foreground
 
 ```zsh
 docker compose up --build
 ```
 
+- List all containers
+
+```zsh
+docker ps -a
+```
+
 - Prune all stopped containers
 
 ```zsh
 docker container prune -f
-```
-
-- Check containers status
-
-```zsh
-docker ps
 ```
