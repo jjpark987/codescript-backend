@@ -75,56 +75,20 @@ python -m app.database.seed
 
 ## Docker
 
-- Force build and run containers in the foreground
+- Build image and create container in the foreground
 
 ```zsh
 docker compose up --build
 ```
 
-- Build and run containers in the foreground
+- Prune all stopped containers
 
 ```zsh
-docker compose up
+docker container prune -f
 ```
 
-- Build and run containers in background
-
-```zsh
-docker compose up -d
-```
-
-- Start previously stopped containers
-
-```zsh
-docker compose start
-```
-
-- Stop and remove containers
-
-```zsh
-docker compose down
-```
-
-- Stop containers without removing
-
-```zsh
-docker compose stop
-```
-
-- Restart containers in the background (compose down and up)
-
-```zsh
-docker compose restart
-```
-
-- Check container status
+- Check containers status
 
 ```zsh
 docker ps
-```
-
-- Open a shell inside an already running container
-
-```zsh
-docker exec -it codescript-fastapi bash
 ```

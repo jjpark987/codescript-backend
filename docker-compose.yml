@@ -5,7 +5,7 @@ services:
     ports:
       - "8000:80"
     environment:
-      - DOCKER_DATABASE_URL=${DOCKER_DATABASE_URL}
+      - DOCKER_DATABASE_URL=${DOCKER_DATABASE_URL:-""}
     volumes:
       - .:/app
     networks:
