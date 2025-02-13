@@ -1,5 +1,5 @@
 services:
-  codescript-fastapi:
+  api:
     build: .
     container_name: codescript-fastapi
     ports:
