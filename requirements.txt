@@ -1,13 +1,5 @@
-# Docker
-cryptography>=44.0.0
-
 # Python
 python-dotenv>=1.0.1
-
-# Jupyter Notebook and Kernel
-ipykernel>=6.29.5
-ipywidgets>=8.1.5
-notebook>=7.2.2
 
 # FastAPI
 aiomysql>=0.2.0
@@ -17,9 +9,5 @@ greenlet>=3.1.1
 sqlalchemy>=2.0.37
 uvicorn>=0.34.0
 
-# Hugging Face Dependencies
-# accelerate>=0.34.2
-# huggingface_hub>=0.24.6
-# numpy<2
-# torch>=2.2.2
-# transformers>=4.44.2
+# Docker
+cryptography>=44.0.0
