@@ -1,7 +1,7 @@
 services:
   api:
     build: .
-    container_name: codescript-fastapi
+    container_name: codescript-backend
     ports:
       - "8000:80"
     environment:
