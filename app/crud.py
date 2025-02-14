@@ -2,8 +2,8 @@ from fastapi import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.future import select
 from sqlalchemy.orm import Session
-from app.api.models import Problem, Subcategory
-from app.api.schemas import ProblemCreate, ProblemResponse
+from app.models import Problem, Subcategory
+from app.schemas import ProblemCreate, ProblemResponse
 
 async def post_problem(db: Session, problem: ProblemCreate) -> ProblemResponse:
     result = await db.execute(select(Subcategory).filter(Subcategory.id == problem.subcategory_id))

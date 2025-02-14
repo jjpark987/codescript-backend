@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.api.schemas import ProblemCreate, ProblemResponse
-from app.api.crud import post_problem  
-from app.database.config import get_session
+from app.schemas import ProblemCreate, ProblemResponse
+from app.crud import post_problem  
+from app.database import get_session
 
 router = APIRouter()
 

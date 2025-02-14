@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from typing import Dict
-from app.api.config import add_cors_middleware
-from app.api.routers import router as problems_router
+from app.config import add_cors_middleware
+from app.routers import router as problems_router
 
 app = FastAPI()
 

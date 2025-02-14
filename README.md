@@ -1,4 +1,4 @@
-# CodeScript
+# CodeScript Backend
 
 This repository contains the backend code for CodeScript.
 
@@ -38,7 +38,7 @@ pip install -r requirements.txt
 5. Run API server
 
 ```zsh
-uvicorn app.api.main:app --host 0.0.0.0 --port 80
+uvicorn app.main:app --host 0.0.0.0 --port 80
 ```
 
 The API should now be running at http://0.0.0.0:80.
@@ -70,7 +70,7 @@ To seed the database with:
 - Seed database
 
 ```zsh
-python -m app.database.seed
+python -m app.seed
 ```
 
 ## Docker

@@ -22,4 +22,4 @@ COPY . .
 EXPOSE 80
 
 # Run migrations, seed data, and start FastAPI
-CMD ["uvicorn", "app.api.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
