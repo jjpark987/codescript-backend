@@ -8,10 +8,6 @@ from typing import AsyncGenerator
 
 load_dotenv()
 
-# # Function to check if we are inside a docker container
-# def is_running_in_docker() -> bool:
-#     return os.path.exists('/.dockerenv') or os.path.exists('/run/.containerenv')
-
 # Determine DATABASE_URL
 DATABASE_URL = os.getenv('DOCKER_DATABASE_URL') if os.path.exists('/.dockerenv') else os.getenv('DATABASE_URL')
 
