@@ -1,5 +1,4 @@
-from datetime import datetime
-from sqlalchemy import Integer, String, Text, JSON, DateTime, ForeignKey, CheckConstraint, func
+from sqlalchemy import Integer, String, Text, JSON, ForeignKey, CheckConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship, DeclarativeBase
 from typing import List, Dict
 
@@ -55,17 +54,3 @@ class Problem(Base):
 
     def __str__(self) -> str:
         return self.title
-
-class Submission(Base):
-    __tablename__ = 'submissions'
-    
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
-    content: Mapped[str] = mapped_column(Text, nullable=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-    user_id: Mapped[int] = mapped_column(Integer, nullable=False)
-
-    problem_id: Mapped[int] = mapped_column(Integer, ForeignKey('problems.id'), nullable=False)
-    problem: Mapped['Problem'] = relationship('Problem', back_populates='submissions')
-
-    def __str__(self) -> str:
-        return f'Submission ID: {self.id}, Problem ID: {self.problem.id}, User ID: {self.user_id}'
