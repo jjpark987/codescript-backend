@@ -46,8 +46,6 @@ class Problem(Base):
     subcategory_id: Mapped[int] = mapped_column(Integer, ForeignKey('subcategories.id'), nullable=False)
     subcategory: Mapped['Subcategory'] = relationship('Subcategory', back_populates='problems')
 
-    submissions: Mapped[list['Submission']] = relationship('Submission', back_populates='problem')
-
     __table_args__ = (
         CheckConstraint('difficulty IN (1, 2, 3)', name='check_difficulty'),
     )
