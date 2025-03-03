@@ -1,10 +1,10 @@
 # Use an official Python runtime as a parent image
-FROM python:3.13.1-slim
+FROM python:3.13.2-slim
 
 # Install system dependencies (MySQL client & other necessary tools)
 RUN apt update && apt install -y --no-install-recommends \
     default-mysql-client \
-    && rm -rf /var/lib/apt/lists/* 
+    && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory in the container
 WORKDIR /app
