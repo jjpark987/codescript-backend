@@ -1,15 +1,27 @@
 services:
-  api:
-    build: .
+  app:
     container_name: codescript-backend
+    build: .
     volumes:
       - .:/app
     environment:
-      - DOCKER_DATABASE_URL=${DOCKER_DATABASE_URL:-""}
+      - LLM_API_URL=${LLM_API_URL:-}
     networks:
       - codescript_network
     ports:
-      - "8000:80"
+      - "8000:8000"
+    depends_on:
+      - model
+
+  model:
+    container_name: codescript-llm
+    build: ../codescript-llm
+    volumes:
+      - ../codescript-llm:/app
+    networks:
+      - codescript_network
+    ports:
+      - "8001:8000"
 
 networks:
   codescript_network:

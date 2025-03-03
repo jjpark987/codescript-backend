@@ -38,10 +38,10 @@ pip install -r requirements.txt
 5. Run API server
 
 ```zsh
-uvicorn app.main:app --host 0.0.0.0 --port 80
+uvicorn app.main:app --host 0.0.0.0
 ```
 
-The API should now be running at http://0.0.0.0:80.
+The API should now be running at http://0.0.0.0:8000.
 
 ## Alebmic Version Control
 
@@ -75,7 +75,7 @@ python -m app.seed
 
 ## Docker
 
-### Commands
+### Backend + LLM
 
 - Build image and create container in the foreground
 
@@ -83,14 +83,10 @@ python -m app.seed
 docker compose up --build
 ```
 
-- List all containers
+### Backend Only
+
+- Build image and create container in the foreground
 
 ```zsh
-docker ps -a
-```
-
-- Prune all stopped containers
-
-```zsh
-docker container prune -f
+docker compose -f docker-compose.backend.yml up --build
 ```

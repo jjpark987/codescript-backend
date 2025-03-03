@@ -15,3 +15,12 @@ class ProblemCreate(BaseModel):
 
 class ProblemResponse(ProblemCreate):
     id: int
+
+class LLMRequest(BaseModel):
+    problem_data: dict
+    user_submission: str
+
+class LLMResponse(BaseModel):
+    analysis: str
+    suggestions: List[str]
+    score: int = Field(..., ge=0, le=3)

@@ -1,0 +1,16 @@
+services:
+  app:
+    container_name: codescript-backend
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - DOCKER_DATABASE_URL=${DOCKER_DATABASE_URL:-}
+    networks:
+      - codescript_network
+    ports:
+      - "8000:80"
+
+networks:
+  codescript_network:
+    external: true
