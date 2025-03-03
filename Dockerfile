@@ -2,9 +2,9 @@
 FROM python:3.13.2-slim
 
 # Install system dependencies
-RUN apt update && apt install -y --no-install-recommends \
-    default-mysql-client \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt update && \
+    apt install -y --no-install-recommends default-mysql-client && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set the working directory in the container
 WORKDIR /app
