@@ -1,6 +1,6 @@
-import os
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
+from os import getenv, path
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
@@ -9,7 +9,7 @@ from typing import AsyncGenerator
 load_dotenv()
 
 # Determine DATABASE_URL
-DATABASE_URL = os.getenv('DOCKER_DATABASE_URL') if os.path.exists('/.dockerenv') else os.getenv('DATABASE_URL')
+DATABASE_URL = getenv('DOCKER_DATABASE_URL') if path.exists('/.dockerenv') else getenv('DATABASE_URL')
 
 # SQLAlchemy setup for async
 engine = create_async_engine(DATABASE_URL, echo=True)

@@ -1,5 +1,5 @@
 services:
-  app:
+  api:
     container_name: codescript-backend
     build: .
     volumes:
@@ -9,7 +9,7 @@ services:
     networks:
       - codescript_network
     ports:
-      - "8000:80"
+      - "8000:8000"
 
 networks:
   codescript_network:

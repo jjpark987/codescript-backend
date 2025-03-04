@@ -1,4 +1,4 @@
-import asyncio
+from asyncio import run
 from sqlalchemy.future import select
 from app.database import get_session_seed, engine
 from app.models import Category, Subcategory
@@ -80,5 +80,5 @@ async def main():
         await engine.dispose()
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    run(main())
     

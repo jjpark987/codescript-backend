@@ -1,11 +1,9 @@
 services:
-  app:
+  api:
     container_name: codescript-backend
     build: .
     volumes:
       - .:/app
-    environment:
-      - LLM_API_URL=${LLM_API_URL:-}
     networks:
       - codescript_network
     ports:
@@ -15,14 +13,17 @@ services:
 
   model:
     container_name: codescript-llm
-    build: ../codescript-llm
+    image: ollama/ollama
     volumes:
-      - ../codescript-llm:/app
+      - ollama_model:/root/.ollama/models
     networks:
       - codescript_network
     ports:
-      - "8001:8000"
+      - "11434:11434"
 
 networks:
   codescript_network:
     external: true
+
+volumes:
+  ollama_model:
