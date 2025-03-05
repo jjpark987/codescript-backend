@@ -8,7 +8,7 @@ class ProblemCreate(BaseModel):
     image_urls: List[str]
     description: str
     examples: List[Dict[str, str]]
-    constraints: str
+    constraints: List[str]
 
     class Config:
         from_attributes = True
