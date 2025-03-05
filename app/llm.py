@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from ollama import Client
-from os import getenv
+from os import getenv, path
 from re import search, DOTALL
 
 load_dotenv()

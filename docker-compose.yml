@@ -8,22 +8,22 @@ services:
       - codescript_network
     ports:
       - "8000:8000"
-    depends_on:
-      - model
+    # depends_on:
+    #   - model
 
-  model:
-    container_name: codescript-llm
-    image: ollama/ollama
-    volumes:
-      - ollama_model:/root/.ollama/models
-    networks:
-      - codescript_network
-    ports:
-      - "11434:11434"
+  # model:
+  #   container_name: codescript-llm
+  #   image: ollama/ollama
+  #   volumes:
+  #     - ollama_model:/root/.ollama/models
+  #   networks:
+  #     - codescript_network
+  #   ports:
+  #     - "11434:11434"
 
 networks:
   codescript_network:
     external: true
 
-volumes:
-  ollama_model:
+# volumes:
+#   ollama_model:

@@ -17,25 +17,37 @@ This repository contains the backend code for CodeScript.
 git clone git@github.com:jjpark987/codescript-backend.git
 ```
 
-2. Create a virtual environment if there isn't one already
+2. Download [Ollama](https://ollama.com/) and run server
+
+```zsh
+ollama serve
+```
+
+3. Download DeepSeek model (for more models click [here](https://ollama.com/library/deepseek-r1:7b))
+
+```zsh
+ollama run deepseek-r1:7b
+```
+
+4. Create a virtual environment if there isn't one already
 
 ```zsh
 python -m venv .venv
 ```
 
-3. Activate virtual environment
+5. Activate virtual environment
 
 ```zsh
 source .venv/bin/activate
 ```
 
-4. Install dependencies
+6. Install dependencies
 
 ```zsh
 pip install -r requirements.txt
 ```
 
-5. Run API server
+7. Run API server
 
 ```zsh
 uvicorn app.main:app --host 0.0.0.0

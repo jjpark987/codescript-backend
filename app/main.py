@@ -6,7 +6,7 @@ from app.routers import router as problems_router
 from app.schemas import LLMRequest, LLMResponse
 
 app = FastAPI()
-# add_cors_middleware(app)
+add_cors_middleware(app)
 
 @app.get('/')
 async def home() -> Dict[str, str]:
