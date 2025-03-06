@@ -38,10 +38,10 @@ class Problem(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False)
     difficulty: Mapped[int] = mapped_column(Integer, nullable=False)
-    image_urls: Mapped[List[str]] = mapped_column(JSON, nullable=False)    
     description: Mapped[str] = mapped_column(Text, nullable=False)
-    examples: Mapped[List[Dict[str, str]]] = mapped_column(JSON, nullable=False)
     constraints: Mapped[List[str]] = mapped_column(JSON, nullable=False)
+    examples: Mapped[List[Dict[str, str]]] = mapped_column(JSON, nullable=False)
+    image_paths: Mapped[List[str]] = mapped_column(JSON, nullable=False)    
 
     subcategory_id: Mapped[int] = mapped_column(Integer, ForeignKey('subcategories.id'), nullable=False)
     subcategory: Mapped['Subcategory'] = relationship('Subcategory', back_populates='problems')

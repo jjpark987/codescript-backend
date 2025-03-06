@@ -5,10 +5,10 @@ class ProblemCreate(BaseModel):
     subcategory_id: int
     title: str
     difficulty: int = Field(..., ge=1, le=3)
-    image_urls: List[str]
     description: str
-    examples: List[Dict[str, str]]
     constraints: List[str]
+    examples: List[Dict[str, str]]
+    image_paths: List[str]
 
     class Config:
         from_attributes = True

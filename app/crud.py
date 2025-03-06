@@ -5,29 +5,31 @@ from sqlalchemy.orm import Session
 from sqlalchemy.sql import func
 from app.models import Problem, Subcategory
 from app.schemas import ProblemCreate, ProblemResponse
+from app.util import get_signed_image_url
 
 async def post_problem(db: Session, problem: ProblemCreate) -> ProblemResponse:
-    result = await db.execute(select(Subcategory).filter(Subcategory.id == problem.subcategory_id))
-    subcategory = result.scalar_one_or_none()
+    result = await db.execute(
+        select(Subcategory, Problem)
+        .outerjoin(Problem, Problem.title == problem.title)
+        .filter(Subcategory.id == problem.subcategory_id)
+    )
+
+    subcategory, existing_problem = result.first() or (None, None)
 
     if not subcategory: 
         raise HTTPException(status_code=404, detail=f'❌ CRUD: Subcategory {problem.subcategory_id} not found')
-    
-    result = await db.execute(select(Problem).filter(Problem.title == problem.title))
-    existing_problem = result.scalar_one_or_none()
-
     if existing_problem:
         raise HTTPException(status_code=409, detail=f'⏭️ CRUD: "{problem.title}" already exists')
 
     try:
         new_problem = Problem(
+            subcategory_id=problem.subcategory_id,
             title=problem.title,
             difficulty=problem.difficulty,
-            image_urls=problem.image_urls,
             description=problem.description,
-            examples=problem.examples,
             constraints=problem.constraints,
-            subcategory_id=problem.subcategory_id
+            examples=problem.examples,
+            image_paths=problem.image_paths
         )
 
         db.add(new_problem)
@@ -46,20 +48,30 @@ async def post_problem(db: Session, problem: ProblemCreate) -> ProblemResponse:
         print(f'🚨 CRUD unexpected error: {str(e)}')
         raise HTTPException(status_code=500, detail='❌ CRUD: Internal Server Error')
     
-async def get_random_problem(db: Session) -> ProblemResponse:
+async def get_random_problem(db: Session) -> dict:
     result = await db.execute(select(Problem).order_by(func.random()).limit(1))
     problem = result.scalar_one_or_none()
 
     if not problem:
         raise HTTPException(status_code=404, detail='❌ CRUD: Random problem not found')
 
-    return ProblemResponse.model_validate(problem)
+    signed_urls = [get_signed_image_url(path) for path in problem.image_paths]
 
-async def get_problem(db: Session, problem_id: int) -> ProblemResponse:
+    return {
+            'problem': ProblemResponse.model_validate(problem),
+            'image_urls': signed_urls
+        }
+
+async def get_problem(db: Session, problem_id: int) -> dict:
     result = await db.execute(select(Problem).filter(Problem.id == problem_id))
     problem = result.scalar_one_or_none()
 
     if not problem:
         raise HTTPException(status_code=404, detail=f'❌ CRUD: Problem {problem_id} not found')
 
-    return ProblemResponse.model_validate(problem)
+    signed_urls = [get_signed_image_url(path) for path in problem.image_paths]
+
+    return {
+            'problem': ProblemResponse.model_validate(problem),
+            'image_urls': signed_urls
+        }

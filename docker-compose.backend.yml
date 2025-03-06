@@ -6,6 +6,8 @@ services:
       - .:/app
     environment:
       - DOCKER_DATABASE_URL=${DOCKER_DATABASE_URL:-}
+      - GCP_CREDENTIALS=${GCP_CREDENTIALS:-}
+      - GC_BUCKET_NAME=${GC_BUCKET_NAME:-}
     networks:
       - codescript_network
     ports:
