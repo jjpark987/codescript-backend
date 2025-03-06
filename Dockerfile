@@ -1,7 +1,9 @@
 FROM python:3.13.2-slim
 
 RUN apt update && \
-    apt install -y --no-install-recommends default-mysql-client && \
+    apt install -y --no-install-recommends \
+        default-mysql-client \
+        curl && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
