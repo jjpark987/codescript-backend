@@ -87,18 +87,8 @@ python -m app.seed
 
 ## Docker
 
-### Backend + LLM
-
 - Build image and create container in the foreground
 
 ```zsh
 docker compose up --build
-```
-
-### Backend Only
-
-- Build image and create container in the foreground
-
-```zsh
-docker compose -f docker-compose.backend.yml up --build
 ```

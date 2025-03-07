@@ -1,29 +1,39 @@
 services:
-  api:
+  backend:
     container_name: codescript-backend
     build: .
     volumes:
       - .:/app
+    environment:
+      - DOCKER_DATABASE_URL=${DOCKER_DATABASE_URL:-}
+      - GCP_CREDENTIALS=${GCP_CREDENTIALS:-}
+      - GC_BUCKET_NAME=${GC_BUCKET_NAME:-}
     networks:
       - codescript_network
     ports:
       - "8000:8000"
-    # depends_on:
-    #   - model
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 3s
+      timeout: 3s
 
-  # model:
-  #   container_name: codescript-llm
-  #   image: ollama/ollama
-  #   volumes:
-  #     - ollama_model:/root/.ollama/models
-  #   networks:
-  #     - codescript_network
-  #   ports:
-  #     - "11434:11434"
+  frontend:
+    container_name: codescript-frontend
+    build:
+      context: ../codescript-frontend
+      args:
+        - VITE_RANDOM_PROBLEM_URL=${VITE_RANDOM_PROBLEM_URL}
+        - VITE_GENERATE_FEEDBACK_URL=${VITE_GENERATE_FEEDBACK_URL}
+    env_file: 
+      - .env
+    networks:
+      - codescript_network
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
 
 networks:
   codescript_network:
     external: true
-
-# volumes:
-#   ollama_model:

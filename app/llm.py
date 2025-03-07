@@ -1,11 +1,15 @@
 from dotenv import load_dotenv
 from ollama import Client
-from os import getenv, path
+from os import getenv
 from re import search, DOTALL
 
 load_dotenv()
 
+llm_model = getenv('MODEL')
+
 def create_prompt(problem: dict, submission: str) -> str:
+    submission = submission.replace('"', '').replace('\n', '')
+
     prompt = f'''
         ### System Instructions:
         You do not remember any past conversations. Treat this as a completely new session with no prior knowledge.
@@ -45,7 +49,7 @@ def create_prompt(problem: dict, submission: str) -> str:
 
 def ask_model(prompt: str):
     try:
-        response = Client(host=getenv('OLLAMA_HOST_URL')).generate(model='deepseek-r1:7b', prompt=prompt)
+        response = Client(host=getenv('OLLAMA_HOST_URL')).generate(model=llm_model, prompt=prompt)
         return response['response']
     except Exception as e:
         print(f'❌ Error sending request to ollama client: {e}')
@@ -76,4 +80,5 @@ def parse_response(response: str) -> dict:
 def run_deepseek(problem: dict, submission: str):
     prompt = create_prompt(problem, submission)
     response = ask_model(prompt)
+    print(response)
     return parse_response(response)

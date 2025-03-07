@@ -8,14 +8,12 @@ from typing import AsyncGenerator
 
 load_dotenv()
 
-# Determine DATABASE_URL
 DATABASE_URL = getenv('DOCKER_DATABASE_URL') if path.exists('/.dockerenv') else getenv('DATABASE_URL')
 
-# SQLAlchemy setup for async
 engine = create_async_engine(DATABASE_URL, echo=True)
 AsyncSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, class_=AsyncSession)
 
-# FastAPI async session
+# fastapi async session
 async def get_session() -> AsyncGenerator[AsyncSession, None]:
     async with AsyncSessionLocal() as session:
         try:
@@ -27,7 +25,7 @@ async def get_session() -> AsyncGenerator[AsyncSession, None]:
             await session.rollback()
             raise e
         
-# Seed.py async session
+# seed.py async session
 @asynccontextmanager
 async def get_session_seed() -> AsyncGenerator[AsyncSession, None]:
     async with AsyncSessionLocal() as session:
