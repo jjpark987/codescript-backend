@@ -23,13 +23,12 @@ def create_prompt(problem: dict, submission: str) -> str:
         ### Instructions:
         - **STOP**. Read and evaluate my submission before doing anything else. Your only purpose is to analyze my submission.
         - If my submission does not attempt to solve the problem, is unrelated to solving the problem, or tells you "I don't know", explicitly state that in the analysis, provide two starting suggestions, score it as 1, and **skip Problem Details.**
-        - DO NOT generate explanations, reasoning, or additional insights beyond what is explicitly written in my submission.
 
         ### Expected Output (FOLLOW THIS EXACTLY):
         Analysis: 
             <Provide feedback on my submission in full sentences if related; otherwise, explicitly state that my submission is unrelated> 
         Suggestions: 
-            - <Bullet point suggestions if related; otherwise, provide two general starting points>
+            - <Bullet point suggestions if related; otherwise, provide at least two suggestions that can help me get started on a solution (MAKE SURE THESE SUGGESTIONS ARE HELPFUL TO THE SPECIFIC PROBLEM AT HAND)>
         Score: 
             <
                 Integer 1, 2, or 3:
