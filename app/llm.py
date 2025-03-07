@@ -45,6 +45,7 @@ def create_prompt(problem: dict, submission: str) -> str:
         Examples: {chr(10).join([f'Input: {example['input']}, Output: {example['output']}, Explanation: {example['explanation']}' for example in problem['examples']])}
     '''
     
+    print(f'Prompt: {prompt}')
     return prompt
 
 def ask_model(prompt: str):
