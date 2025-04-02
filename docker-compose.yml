@@ -8,6 +8,11 @@ services:
       - DOCKER_DATABASE_URL=${DOCKER_DATABASE_URL:-}
       - GCP_CREDENTIALS=${GCP_CREDENTIALS:-}
       - GC_BUCKET_NAME=${GC_BUCKET_NAME:-}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-}
+      - S3_BUCKET_NAME=${S3_BUCKET_NAME:-}
+      - DEMO_MODE=${DEMO_MODE:-}
     networks:
       - codescript_network
     ports:

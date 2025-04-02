@@ -78,6 +78,8 @@ alembic upgrade head
 
 ## Seeding Database
 
+### Local MySQL
+
 To seed the database with:
 - 3 categories (data manipulations, combinatorics, optimizations)
 - subcategories for each category
@@ -88,6 +90,14 @@ To seed the database with:
 
 ```zsh
 python -m app.seed
+```
+
+### AWS DynamoDB
+
+To seed the database a current snapshot of the local MySQL database:
+
+```zsh
+python -m scripts.seed_dynamodb
 ```
 
 ## Docker
