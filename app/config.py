@@ -1,6 +1,9 @@
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from threading import Lock
+
+load_dotenv()
 
 def add_cors_middleware(app: FastAPI) -> None:
     app.add_middleware(

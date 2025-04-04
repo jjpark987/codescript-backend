@@ -1,7 +1,7 @@
-from asyncio import run
-from sqlalchemy.future import select
 from app.database import get_session_seed, engine
 from app.models import Category, Subcategory
+from asyncio import run
+from sqlalchemy.future import select
 
 async def seed_categories() -> None:
     async with get_session_seed() as db:

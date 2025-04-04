@@ -1,13 +1,11 @@
+from app.models import Problem, Subcategory
+from app.util import get_signed_image_url
+from app.schemas import ProblemCreate, ProblemResponse
 from fastapi import HTTPException
-from random import choice
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.future import select
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import func
-from app.database import get_dynamo_table, is_demo_mode
-from app.models import Problem, Subcategory
-from app.schemas import ProblemCreate, ProblemResponse
-from app.util import get_signed_image_url, get_signed_image_url_s3
 
 async def post_problem(db: Session, problem: ProblemCreate) -> ProblemResponse:
     result = await db.execute(
@@ -21,7 +19,7 @@ async def post_problem(db: Session, problem: ProblemCreate) -> ProblemResponse:
     if not subcategory: 
         raise HTTPException(status_code=404, detail=f'❌ CRUD: Subcategory {problem.subcategory_id} not found')
     if existing_problem:
-        raise HTTPException(status_code=409, detail=f'⏭️ CRUD: "{problem.title}" already exists')
+        raise HTTPException(status_code=409, detail=f'⏭️ CRUD: {problem.title} already exists')
 
     try:
         new_problem = Problem(
@@ -77,18 +75,3 @@ async def get_problem(db: Session, problem_id: int) -> dict:
             'problem': ProblemResponse.model_validate(problem),
             'image_urls': signed_urls
         }
-
-async def get_random_problem_dynamo() -> dict:
-    response = get_dynamo_table().scan()
-    items = response.get('Items', [])
-    if not items:
-        raise Exception('Random problem not found')
-
-    item = choice(items)
-    
-    signed_urls = [get_signed_image_url_s3(path) for path in item.get('image_paths', [])]
-    
-    return {
-        'problem': ProblemResponse.model_validate(item),
-        'image_urls': signed_urls
-    }

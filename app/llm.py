@@ -5,7 +5,8 @@ from re import search, DOTALL
 
 load_dotenv()
 
-llm_model = getenv('MODEL')
+LLM_MODEL = getenv('MODEL')
+OLLAMA_HOST_URL = getenv('OLLAMA_HOST_URL')
 
 def create_prompt(problem: dict, submission: str) -> str:
     prompt = f'''
@@ -67,7 +68,7 @@ def create_prompt(problem: dict, submission: str) -> str:
 
 def ask_model(prompt: str):
     try:
-        response = Client(host=getenv('OLLAMA_HOST_URL')).generate(model=llm_model, prompt=prompt)
+        response = Client(host=OLLAMA_HOST_URL).generate(model=LLM_MODEL, prompt=prompt)
         return response['response']
     except Exception as e:
         print(f'❌ Error sending request to ollama client: {e}')
