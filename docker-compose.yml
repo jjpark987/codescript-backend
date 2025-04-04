@@ -6,16 +6,8 @@ services:
       - .:/app
     env_file:
       - ./.env
-    # environment:
-    #   - DOCKER_DATABASE_URL=${DOCKER_DATABASE_URL:-}
-    #   - GCP_CREDENTIALS=${GCP_CREDENTIALS:-}
-    #   - GC_BUCKET_NAME=${GC_BUCKET_NAME:-}
-    networks:
-      - codescript_network
     ports:
       - "8000:8000"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
 
   frontend:
     container_name: codescript-frontend
@@ -26,14 +18,8 @@ services:
         - VITE_GENERATE_FEEDBACK_URL=${VITE_GENERATE_FEEDBACK_URL}
     env_file: 
       - .env
-    networks:
-      - codescript_network
     ports:
       - "3000:80"
     depends_on:
       backend:
-        condition: service_healthy
-
-networks:
-  codescript_network:
-    external: true
+        condition: service_started
