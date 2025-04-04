@@ -99,3 +99,11 @@ To seed the database a current snapshot of the local MySQL database:
 ```zsh
 python -m scripts.seed_dynamodb
 ```
+
+## Docker
+
+- Build image and create container in the foreground
+
+```zsh
+docker compose up --build
+```
