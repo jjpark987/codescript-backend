@@ -14,14 +14,14 @@ Please read this [Dev article](https://dev.to/jjpark987/building-a-code-problem-
 
 - Ruby 3.4.3
 - Rails 8.0.2
-- MySQL server
+- PostgreSQL server
 
 ### Installation
 
-1. Clone the repository
+1. Clone the rails branch of the repository.
 
 ```zsh
-git clone git@github.com:jjpark987/codescript-backend.git
+git clone --branch rails git@github.com:jjpark987/codescript-backend.git
 ```
 
 2. Download [Ollama](https://ollama.com/) and run server
@@ -36,31 +36,31 @@ ollama serve
 ollama run deepseek-r1:7b
 ```
 
-4. Create a virtual environment if there isn't one already
+4. Install dependencies
 
 ```zsh
-python -m venv .venv
+bundle install
 ```
 
-5. Activate virtual environment
+5. Create PostgreSQL database
 
 ```zsh
-source .venv/bin/activate
+rails db:create
 ```
 
-6. Install dependencies
+6. Migrate
 
 ```zsh
-pip install -r requirements.txt
+rails db:migrate
 ```
 
 7. Run API server
 
 ```zsh
-uvicorn app.main:app --host 0.0.0.0
+rails server
 ```
 
-The API should now be running at http://0.0.0.0:8000.
+The API should now be running at http://localhost:3000.
 
 ## Alebmic Version Control
 
@@ -86,12 +86,12 @@ To seed the database with:
 - 3 categories (data manipulations, combinatorics, optimizations)
 - subcategories for each category
 
-- Make sure MySQL database server is up and migrated with the latest migration
+- Make sure PostgreSQL database server is up and migrated with the latest migration
 
 - Seed database
 
 ```zsh
-python -m app.seed
+rails db:seed
 ```
 
 ## Docker
@@ -101,6 +101,3 @@ python -m app.seed
 ```zsh
 docker compose up --build
 ```
-
-
-pgloader mysql://root:wQ57472m@localhost/codescript_db pgsql:///codescript_db
