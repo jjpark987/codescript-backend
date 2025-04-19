@@ -104,6 +104,7 @@ python -m scripts.seed_dynamodb
 ## Docker
 
 - Build image and create container in the foreground
+- This command requires the codescript-frontend to be in the same root directory
 
 ```zsh
 docker compose up --build
