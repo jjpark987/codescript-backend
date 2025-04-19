@@ -62,22 +62,6 @@ rails server
 
 The API should now be running at http://localhost:3000.
 
-## Alebmic Version Control
-
-This project uses Alembic for managing database migrations and version control. Whenever there are updates to the database models, we must create and apply a migration to ensure that the database schema remains in sync with the application’s data structures.
-
-1. Create migration
-
-```zsh
-alembic revision --autogenerate -m "Migration message"
-```
-
-2. Migrate
-
-```zsh
-alembic upgrade head
-```
-
 ## Seeding Database
 
 ### Local MySQL
