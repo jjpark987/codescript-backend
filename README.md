@@ -1,4 +1,4 @@
-# CodeScript Backend
+# CodeScript Rails Backend
 
 This repository contains the Rails version of the backend code for CodeScript.
 
@@ -57,10 +57,10 @@ rails db:migrate
 7. Run API server
 
 ```zsh
-rails server
+rails s
 ```
 
-The API should now be running at http://localhost:3000.
+The API should now be running at http://localhost:8000.
 
 ## Seeding Database
 
@@ -81,6 +81,7 @@ rails db:seed
 ## Docker
 
 - Build image and create container in the foreground
+- This command requires the codescript-frontend to be in the same root directory
 
 ```zsh
 docker compose up --build

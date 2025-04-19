@@ -1,0 +1,24 @@
+services:
+  backend:
+    container_name: codescript-rails-backend
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - DOCKER=true
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+
+  frontend:
+    container_name: codescript-frontend
+    build:
+      context: ../codescript-frontend
+      args:
+        - VITE_RANDOM_PROBLEM_URL=${VITE_RANDOM_PROBLEM_URL}
+        - VITE_GENERATE_FEEDBACK_URL=${VITE_GENERATE_FEEDBACK_URL}
+    env_file: 
+      - .env
+    ports:
+      - "3000:80"
