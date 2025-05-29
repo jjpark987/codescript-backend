@@ -64,7 +64,7 @@ The API should now be running at http://localhost:8000.
 
 ## Seeding Database
 
-### Local MySQL
+### Local PostgreSQL
 
 To seed the database with:
 - 3 categories (data manipulations, combinatorics, optimizations)
