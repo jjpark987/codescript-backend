@@ -49,7 +49,12 @@ async def post_problem(db: Session, problem: ProblemCreate) -> ProblemResponse:
         raise HTTPException(status_code=500, detail='❌ CRUD: Internal Server Error')
     
 async def get_random_problem(db: Session) -> dict:
-    result = await db.execute(select(Problem).order_by(func.random()).limit(1))
+    result = await db.execute(
+        select(Problem)
+        .order_by(func.random())
+        .limit(1)
+    )
+
     problem = result.scalar_one_or_none()
 
     if not problem:
@@ -63,7 +68,11 @@ async def get_random_problem(db: Session) -> dict:
         }
 
 async def get_problem(db: Session, problem_id: int) -> dict:
-    result = await db.execute(select(Problem).filter(Problem.id == problem_id))
+    result = await db.execute(
+        select(Problem)
+        .filter(Problem.id == problem_id)
+    )
+    
     problem = result.scalar_one_or_none()
 
     if not problem:

@@ -17,4 +17,3 @@ async def get_random_problem_route(db: Session = Depends(get_session)):
 @router.get('/problems/{problem_id}')
 async def get_problem_route(problem_id: int, db: Session = Depends(get_session)):
     return await get_problem(db, problem_id)
-    
