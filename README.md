@@ -56,7 +56,7 @@ pip install -r requirements.txt
 7. Run API server
 
 ```zsh
-uvicorn app.main:app --host 0.0.0.0
+python -m uvicorn app.main:app --host 0.0.0.0
 ```
 
 The API should now be running at http://0.0.0.0:8000.
