@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   post '/generate_feedback', to: 'llm#generate_feedback'
 
   get 'problems/random', to: 'problems#random'
-  resources :problems, only: [:create, :show]
+  resources :problems, only: [:create]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

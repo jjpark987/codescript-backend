@@ -45,19 +45,19 @@ bundle install
 5. Create PostgreSQL database
 
 ```zsh
-rails db:create
+bundle exec rails db:create
 ```
 
 6. Migrate
 
 ```zsh
-rails db:migrate
+bundle exec rails db:migrate
 ```
 
 7. Run API server
 
 ```zsh
-rails s
+bundle exec rails s
 ```
 
 The API should now be running at http://localhost:8000.
